@@ -28,9 +28,9 @@ export const opportunities: AirdropOpportunity[] = [
   },
   {
     name: 'Kodiak Finance',
-    assets: ['HYPE', 'ETH', 'Stablecoins'],
+    assets: ['ETH', 'Stablecoins'],
     link: 'https://hypecoin.xyz/airdrop',
-    chains: ['HyperEVM']
+    chains: ['Berachain']
   },
   {
     name: 'HypurFi Lending',
@@ -96,7 +96,7 @@ export const opportunities: AirdropOpportunity[] = [
     name: 'Neutral Trade',
     assets: ['Stablecoins', 'SOL', 'ETH', 'BTC'],
     link: 'https://app.neutral.trade/',
-    chains: ['Solana', 'Ethereum', 'HyperEVM']
+    chains: ['Solana']
   },
   {
     name: 'SaltLayer',
@@ -126,7 +126,7 @@ export const opportunities: AirdropOpportunity[] = [
     name: 'Hyperdrive',
     assets: ['Stablecoins', 'HYPE'],
     link: 'https://app.hyperdrive.fi/earn',
-    chains: ['Solana', 'HyperEVM']
+    chains: ['HyperEVM']
   },
   {
     name: 'STEAMM',

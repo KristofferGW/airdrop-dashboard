@@ -1,3 +1,5 @@
+import debridgeChainIdMap from "../constants/debridgeChainMap";
+
 export const fetchBungeeChains = async () => {
     const res = await fetch("https://public-backend.bungee.exchange/api/v1/supported-chains");
     if (!res.ok) throw new Error("Failed to fetch Bungee chains");
@@ -11,6 +13,25 @@ export const fetchBungeeChains = async () => {
             icon: chain.icon,
             source: "Bungee"
         }));
+};
+
+export const fetchDebridgeChains = async () => {
+    const res = await fetch("https://dln.debridge.finance/v1.0/supported-chains-info");
+    if (!res.ok) throw new Error("Failed to fetch deBridge chains");
+
+    const data = await res.json();
+
+    return data.chains.map((chain: any) => {
+      const rawId = chain.chainId;
+      const mappedId = debridgeChainIdMap[rawId] ?? null;
+
+      return {
+        name: chain.name,
+        chainId: mappedId,
+        icon: null,
+        source: "deBridge"
+      };
+    });
 };
 
 export const fetchJumperChains = async () => {
@@ -45,6 +66,12 @@ export const bridgesConfig = [
     url: "https://www.bungee.exchange",
     fetchChains: fetchBungeeChains,
     sourceName: "Bungee",
+  },
+  {
+    name: "deBridge",
+    url: "https://debridge.finance",
+    fetchChains: fetchDebridgeChains,
+    sourceName: "deBridge",
   },
   {
     name: "Jumper Exchange",

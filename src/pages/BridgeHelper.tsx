@@ -72,22 +72,28 @@ const BridgeHelper = () => {
         console.log("Chains with null chainId:", chains.filter(c => c.chainId === null));
     };
 
+    const filteredChains = chains.filter((chain) => {
+        if (chain.chainId === 1 && chain.name !== "Ethereum") return false;
+        // add more filtering here
+        return true;
+    });
+
+
     const uniqueChains = Array.from(
-        Object.values(
-            chains.reduce((acc, chain) => {
-                if (!chain.chainId) return acc;
+        filteredChains.reduce((acc, chain) => {
+            if (!chain.chainId) return acc;
 
-                const key = chain.chainId;
-                const current = acc[key];
+            const existing = acc.get(chain.chainId);
 
-                if (!current || (current.name === "" && chain.name)) {
-                    acc[key] = chain;
-                }
+            if (!existing || (!existing.icon && chain.icon)) {
+                acc.set(chain.chainId, chain);
+            }
 
-                return acc;
-            }, {} as Record<number, Chain>)
-        )
+            return acc;
+        }, new Map<number, Chain>())
+            .values()
     ).sort((a, b) => a.name.localeCompare(b.name));
+
 
 
 
