@@ -33,12 +33,6 @@ export const opportunities: AirdropOpportunity[] = [
     chains: ['HyperEVM']
   },
   {
-    name: 'KittenSwap',
-    assets: ['HYPE', 'BTC', 'ETH', 'Stablecoins', 'SOL'],
-    link: 'https://app.kittenswap.finance/',
-    chains: ['HyperEVM']
-  },
-  {
     name: 'HypurFi Lending',
     assets: ['HYPE', 'BTC', 'ETH', 'Stablecoins'],
     link: 'https://app.hypurfi.fi/',
@@ -139,5 +133,11 @@ export const opportunities: AirdropOpportunity[] = [
     assets: ['SUI', 'Stablecoins', ],
     link: 'https://steamm.fi/',
     chains: ['Sui']
+  },
+  {
+    name: 'HYBRA',
+    assets: ['HYPE', 'Stablecoins'],
+    link: 'https://www.hybra.finance/',
+    chains: ['HyperEVM']
   }
 ]
