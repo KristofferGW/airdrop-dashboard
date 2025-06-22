@@ -139,5 +139,11 @@ export const opportunities: AirdropOpportunity[] = [
     assets: ['HYPE', 'Stablecoins'],
     link: 'https://www.hybra.finance/',
     chains: ['HyperEVM']
+  },
+  {
+    name: 'GLIQUID',
+    assets: ['HYPE'],
+    link: 'https://www.gliquid.xyz/',
+    chains: ['HyperEVM']
   }
 ]
