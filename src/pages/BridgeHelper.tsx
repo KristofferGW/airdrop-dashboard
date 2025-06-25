@@ -28,6 +28,8 @@ const BridgeHelper = () => {
                 const allChainsPerBridge = await Promise.all(
                     bridgesConfig.map(async (bridge) => {
                         const chains = await bridge.fetchChains() as Chain[];
+
+
                         return chains.map(chain => ({ ...chain, source: bridge.sourceName }));
                     })
                 );
@@ -66,7 +68,6 @@ const BridgeHelper = () => {
                 bridges.push({ name: bridge.name, url: bridge.url });
             }
         });
-
         setShuffledBridges(shuffleArray(bridges));
         setShowCards(true);
         console.log("Chains with null chainId:", chains.filter(c => c.chainId === null));
