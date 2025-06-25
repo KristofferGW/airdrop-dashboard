@@ -4,7 +4,7 @@ import BridgeCards from "../components/BridgeCards"; // Se till att du har denna
 
 type Chain = {
     name: string;
-    chainId: number | null;
+    chainId: string | number;
     icon: string;
     source: string;
 };
@@ -16,8 +16,8 @@ type Bridge = {
 
 const BridgeHelper = () => {
     const [chains, setChains] = useState<Chain[]>([]);
-    const [chainFrom, setChainFrom] = useState<number | null>(null);
-    const [chainTo, setChainTo] = useState<number | null>(null);
+    const [chainFrom, setChainFrom] = useState<string | number | null>(null);
+    const [chainTo, setChainTo] = useState<string | number | null>(null);
     const [showCards, setShowCards] = useState(false);
     const [shuffledBridges, setShuffledBridges] = useState<Bridge[]>([]);
 
@@ -62,8 +62,8 @@ const BridgeHelper = () => {
         const bridges: Bridge[] = [];
 
         bridgesConfig.forEach(bridge => {
-            const hasFrom = chains.some(c => c.chainId === chainFrom && c.source === bridge.sourceName);
-            const hasTo = chains.some(c => c.chainId === chainTo && c.source === bridge.sourceName);
+            const hasFrom = chains.some(c => String(c.chainId) === String(chainFrom) && c.source === bridge.sourceName);
+            const hasTo = chains.some(c => String(c.chainId) === String(chainFrom) && c.source === bridge.sourceName);
             if (hasFrom && hasTo) {
                 bridges.push({ name: bridge.name, url: bridge.url });
             }
@@ -84,14 +84,14 @@ const BridgeHelper = () => {
         filteredChains.reduce((acc, chain) => {
             if (!chain.chainId) return acc;
 
-            const existing = acc.get(chain.chainId);
+            const existing = acc.get(String(chain.chainId));
 
             if (!existing || (!existing.icon && chain.icon)) {
-                acc.set(chain.chainId, chain);
+                acc.set(String(chain.chainId), chain);
             }
 
             return acc;
-        }, new Map<number, Chain>())
+        }, new Map<string, Chain>())
             .values()
     ).sort((a, b) => a.name.localeCompare(b.name));
 
@@ -109,13 +109,13 @@ const BridgeHelper = () => {
                     className="w-full bg-gray-800 border border-gray-600 rounded px-3 py-2 text-white"
                     value={chainFrom ?? ""}
                     onChange={e => {
-                        setChainFrom(Number(e.target.value));
+                        setChainFrom(e.target.value);
                         setShowCards(false);
                     }}
                 >
                     <option value="" disabled>Select a chain</option>
                     {uniqueChains.map(chain => (
-                        <option key={chain.chainId} value={chain.chainId!}>{chain.name}</option>
+                        <option key={chain.chainId} value={chain.chainId!}>{chain.name} ({chain.source})</option>
                     ))}
                 </select>
             </div>
@@ -127,7 +127,7 @@ const BridgeHelper = () => {
                     className="w-full bg-gray-800 border border-gray-600 rounded px-3 py-2 text-white"
                     value={chainTo ?? ""}
                     onChange={e => {
-                        setChainTo(Number(e.target.value));
+                        setChainTo(e.target.value);
                         setShowCards(false);
                     }}
                 >
