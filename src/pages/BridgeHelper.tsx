@@ -115,7 +115,7 @@ const BridgeHelper = () => {
                 >
                     <option value="" disabled>Select a chain</option>
                     {uniqueChains.map(chain => (
-                        <option key={chain.chainId} value={chain.chainId!}>{chain.name} ({chain.source})</option>
+                        <option key={chain.chainId} value={chain.chainId!}>{chain.name}</option>
                     ))}
                 </select>
             </div>
